@@ -67,5 +67,8 @@
   "bugs": {
     "url": "https://github.com/Unibeautify/playground/issues"
   },
+  "engines": {
+    "node": "14.x"
+  },
   "homepage": "https://github.com/AlamgirSarkar/codeformatter"
 }
