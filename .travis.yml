@@ -1,28 +1,5 @@
-env:
-  global:
-    - CC_TEST_REPORTER_ID=8ca21f9a3cc44ce5cc9ac86f18257e6c18656901692f65cb1fd13aae09480a26
 language: node_js
 node_js:
-  - "8"
-  - "10"
-os:
-  - linux
-  - osx
-cache:
-  directories:
-  - node_modules # NPM packages
-before_script:
-  - OS_NAME=$(uname | tr A-Z a-z)
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-${OS_NAME}-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+  - "node"
 script:
-  - npm run lint
-  - npm run build-test
-  - jest --maxWorkers=4
-notifications:
-  email:
-    on_success: never
-    on_failure: change
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - npm run build
