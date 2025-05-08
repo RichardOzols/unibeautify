@@ -33,24 +33,15 @@ export default class ApiClient {
   }
 
   private fetch<T>(path: string = "", payload?: object): Promise<T> {
-    const proxyUrl = "https://allorigins.win/raw?url="; // Example using allorigins.win
-    const apiUrl = `${this.apiUrl}/${path}`;
-    
-    return fetch(proxyUrl + encodeURIComponent(apiUrl), {
+    return fetch(`${this.apiUrl}/${path}`, {
       method: "POST",
       body: payload && JSON.stringify(payload),
       headers: {
         "Content-Type": "application/json",
       },
       redirect: "follow",
-    })
-      .then((res) => res.json())
-      .catch((error) => {
-        console.error("Error:", error);
-        throw error;
-      });
+    }).then(res => res.json());
   }
-
 }
 
 export interface BeautifyResponse {
