@@ -33,16 +33,25 @@ export default class ApiClient {
   }
 
   private fetch<T>(path: string = "", payload?: object): Promise<T> {
-    return fetch(`${this.apiUrl}/${path}`, {
+    // Use CORS Anywhere proxy to bypass CORS
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const apiUrl = `${this.apiUrl}/${path}`;
+  
+    return fetch(proxyUrl + apiUrl, {
       method: "POST",
       body: payload && JSON.stringify(payload),
       headers: {
         "Content-Type": "application/json",
       },
       redirect: "follow",
-      mode: "no-cors",
-    }).then(res => res.json());
+    })
+      .then((res) => res.json()) // Handle response as JSON
+      .catch((error) => {
+        console.error("Error:", error);
+        throw error;
+      });
   }
+
 }
 
 export interface BeautifyResponse {
