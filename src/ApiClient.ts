@@ -33,11 +33,10 @@ export default class ApiClient {
   }
 
   private fetch<T>(path: string = "", payload?: object): Promise<T> {
-    // Use CORS Anywhere proxy to bypass CORS
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const proxyUrl = "https://allorigins.win/raw?url="; // Example using allorigins.win
     const apiUrl = `${this.apiUrl}/${path}`;
-  
-    return fetch(proxyUrl + apiUrl, {
+    
+    return fetch(proxyUrl + encodeURIComponent(apiUrl), {
       method: "POST",
       body: payload && JSON.stringify(payload),
       headers: {
@@ -45,7 +44,7 @@ export default class ApiClient {
       },
       redirect: "follow",
     })
-      .then((res) => res.json()) // Handle response as JSON
+      .then((res) => res.json())
       .catch((error) => {
         console.error("Error:", error);
         throw error;
