@@ -40,6 +40,7 @@ export default class ApiClient {
         "Content-Type": "application/json",
       },
       redirect: "follow",
+      mode: "no-cors",
     }).then(res => res.json());
   }
 }
